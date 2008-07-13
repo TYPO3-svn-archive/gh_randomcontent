@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+    <meta type="array">
+        <description></description>
+        <type></type>
+        <csh_table></csh_table>
+        <labelContext type="array">
+        </labelContext>
+    </meta>
+    <data type="array">
+        <languageKey index="default" type="array">
+            <label index="tt_content.list_type_pi1">Random Content</label>
+            <label index="tt_content.pi_flexform.which_pages">Source page(s)</label>
+            <label index="tt_content.pi_flexform.count">Number of elements</label>
+            <label index="tt_content.pi_flexform.honor_language">Honor language</label>
+            <label index="tt_content.pi_flexform.honor_colpos">Honor column</label>
+        </languageKey>
+        <languageKey index="de" type="array">
+            <label index="tt_content.list_type_pi1">Zufälliger Inhalt</label>
+            <label index="tt_content.pi_flexform.which_pages">Quell-Seite(n)</label>
+            <label index="tt_content.pi_flexform.count">Anzahl</label>
+            <label index="tt_content.pi_flexform.honor_language">Sprache beachten</label>
+            <label index="tt_content.pi_flexform.honor_colpos">Spalte beachten</label>
+        </languageKey>
+        <languageKey index="ru" type="array">
+            <label index="tt_content.list_type_pi1">Случайное содержимое</label>
+            <label index="tt_content.pi_flexform.which_pages">Исходные страницы</label>
+        </languageKey>
+    </data>
+    <orig_hash type="array">
+        <languageKey index="default" type="array">
+            <label index="tt_content.list_type_pi1" type="integer">111748867</label>
+            <label index="tt_content.pi_flexform.which_pages" type="integer">112033683</label>
+            <label index="tt_content.pi_flexform.count" type="integer">191242621</label>
+            <label index="tt_content.pi_flexform.honor_language" type="integer">79801139</label>
+            <label index="tt_content.pi_flexform.honor_colpos" type="integer">48904773</label>
+        </languageKey>
+        <languageKey index="de" type="array">
+            <label index="tt_content.list_type_pi1" type="integer">111748867</label>
+            <label index="tt_content.pi_flexform.which_pages" type="integer">112033683</label>
+            <label index="tt_content.pi_flexform.count" type="integer">191242621</label>
+            <label index="tt_content.pi_flexform.honor_language" type="integer">79801139</label>
+            <label index="tt_content.pi_flexform.honor_colpos" type="integer">48904773</label>
+        </languageKey>
+        <languageKey index="ru" type="array">
+            <label index="tt_content.list_type_pi1" type="integer">111748867</label>
+            <label index="tt_content.pi_flexform.which_pages" type="integer">112033683</label>
+        </languageKey>
+    </orig_hash>
+    <orig_text type="array">
+        <languageKey index="default" type="array">
+        </languageKey>
+        <languageKey index="de" type="array">
+        </languageKey>
+        <languageKey index="ru" type="array">
+        </languageKey>
+    </orig_text>
+</T3locallang>

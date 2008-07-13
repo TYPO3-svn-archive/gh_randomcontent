@@ -1,0 +1,9 @@
+2008-07-13 Gregor Hermens <gregor.hermens@a-mazing.de>
+
+  * New Feature: Now more than one random content element can be chosen.
+  * Converted all locallang*.php to XML
+  * Release 0.2.0
+
+2008-04-24 Gregor Hermens <gregor.hermens@a-mazing.de>
+
+	* Initial release 0.1.0
