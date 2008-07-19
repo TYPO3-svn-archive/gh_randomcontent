@@ -2,6 +2,9 @@
 
     * Nicer ext_icon.gif
     * Removed my editors metadata from the repository
+    * Flexform language disabled
+    * Nicer ce_wiz.gif
+    * fixed use of locallang.* in ..._wizicon.php
 
 2008-07-13 Gregor Hermens <gregor.hermens@a-mazing.de>
 

@@ -1,4 +1,7 @@
 <T3DataStructure>
+  <meta>
+    <langDisable>1</langDisable>
+  </meta>
 	<ROOT>
 		<TCEforms>
 			<sheetTitle>LLL:EXT:gh_randomcontent/locallang_db.xml:tt_content.pi_flexform.settings</sheetTitle>
