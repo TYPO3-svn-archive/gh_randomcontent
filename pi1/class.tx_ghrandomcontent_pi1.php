@@ -43,9 +43,9 @@ class tx_ghrandomcontent_pi1 extends tslib_pibase {
 	/**
 	 * The main method of the PlugIn
 	 *
-	 * @param	string		$content: The PlugIn content
+	 * @param	string	$content: The PlugIn content
 	 * @param	array		$conf: The PlugIn configuration
-	 * @return	The content that is displayed on the website
+	 * @return	string	The content that is displayed on the website
 	 */
 	function main($content,$conf)	{
 		$this->pi_initPIflexForm();		// Init FlexForm configuration for plugin
@@ -83,11 +83,13 @@ class tx_ghrandomcontent_pi1 extends tslib_pibase {
     if($count > count($content_ids)) {
       $count = count($content_ids);
     }
-
-		$content_shown = array_rand($content_ids, $count); // choose random content element
-		if(1 == $count) {
+    
+    $content_shown = array_rand($content_ids, $count); // choose random content element
+    if(1 == $count) {
       $content_shown = array($content_shown);
-		}
+    } else {
+    	shuffle($content_shown);
+    }
 
     $content = '';
     foreach($content_shown as $content_uid) {
@@ -95,7 +97,7 @@ class tx_ghrandomcontent_pi1 extends tslib_pibase {
       $content_conf = array(
         'table' => 'tt_content',
         'select.' => array(
-          'uidInList' => $content_uid,
+          'uidInList' => $content_ids[$content_uid]['uid'],
           'pidInList' => $content_ids[$content_uid]['pid'],
         ),
       );
