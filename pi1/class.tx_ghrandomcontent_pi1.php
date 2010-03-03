@@ -35,10 +35,11 @@ require_once(PATH_tslib.'class.tslib_pibase.php');
  */
 
 class tx_ghrandomcontent_pi1 extends tslib_pibase {
-	var $prefixId = 'tx_ghrandomcontent_pi1';		// Same as class name
-	var $scriptRelPath = 'pi1/class.tx_ghrandomcontent_pi1.php';	// Path to this script relative to the extension dir.
-	var $extKey = 'gh_randomcontent';	// The extension key.
-	var $pi_checkCHash = TRUE;
+	public $prefixId = 'tx_ghrandomcontent_pi1';		// Same as class name
+	public $scriptRelPath = 'pi1/class.tx_ghrandomcontent_pi1.php';	// Path to this script relative to the extension dir.
+	public $extKey = 'gh_randomcontent';	// The extension key.
+	public $pi_checkCHash = TRUE;
+#	public $conf = array();
 
 	/**
 	 * The main method of the PlugIn
@@ -47,17 +48,18 @@ class tx_ghrandomcontent_pi1 extends tslib_pibase {
 	 * @param	array		$conf: The PlugIn configuration
 	 * @return	string	The content that is displayed on the website
 	 */
-	function main($content,$conf)	{
-		$this->pi_initPIflexForm();		// Init FlexForm configuration for plugin
+	public function main($content,$conf)	{
+		$this->conf = $conf;
+		$this->init();
 
 		// get uid of all available content elements:
-		$where = 'pid IN(' . $this->pi_getFFvalue($this->cObj->data['pi_flexform'], 'which_pages', 'sDEF') . ' ) ' . $this->cObj->enableFields('tt_content');
+		$where = 'pid IN(' . $this->conf['pages'] . ' ) ' . $this->cObj->enableFields('tt_content');
 
-		if($this->pi_getFFvalue($this->cObj->data['pi_flexform'], 'honor_language', 'sDEF')) {
+		if($this->conf['honorLanguage']) {
 			$where .= ' AND sys_language_uid = ' . $GLOBALS['TSFE']->sys_page->sys_language_uid;
 		}
-		if($this->pi_getFFvalue($this->cObj->data['pi_flexform'], 'honor_colpos', 'sDEF')) {
-			$where .= ' AND colPos = ' . $this->cObj->data['colPos'];
+		if($this->conf['honorColPos']) {
+			$where .= ' AND colPos = ' . $this->conf['colPos'];
 		}
 
 		$content_ids = $GLOBALS['TYPO3_DB']->exec_SELECTgetRows(
@@ -74,18 +76,16 @@ class tx_ghrandomcontent_pi1 extends tslib_pibase {
 			return false;
 		}
 
-    $count = (int) $this->pi_getFFvalue($this->cObj->data['pi_flexform'], 'count', 'sDEF');
-
-    if(empty($count)) {
-      $count = 1;
+    if(empty($this->conf['count'])) {
+      $this->conf['count'] = 1;
     }
 
-    if($count > count($content_ids)) {
-      $count = count($content_ids);
+    if($this->conf['count'] > count($content_ids)) {
+      $this->conf['count'] = count($content_ids);
     }
-    
-    $content_shown = array_rand($content_ids, $count); // choose random content element
-    if(1 == $count) {
+
+    $content_shown = array_rand($content_ids, $this->conf['count']); // choose random content element
+    if(1 == $this->conf['count']) {
       $content_shown = array($content_shown);
     } else {
     	shuffle($content_shown);
@@ -106,6 +106,40 @@ class tx_ghrandomcontent_pi1 extends tslib_pibase {
     }
 
 		return $this->pi_wrapInBaseClass($content);
+	}
+
+
+	/**
+	 * Initialise this class
+	 *
+	 * @return	boolean		success
+	 */
+	private function init() {
+		$this->pi_initPIflexForm();		// Init FlexForm configuration for plugin
+		if($this->pi_getFFvalue($this->cObj->data['pi_flexform'], 'which_pages', 'sDEF')) {
+			$this->conf['pages'] = $this->pi_getFFvalue($this->cObj->data['pi_flexform'], 'which_pages', 'sDEF');
+		}
+
+		$this->conf['count'] = (int) $this->conf['count'];
+		if($this->pi_getFFvalue($this->cObj->data['pi_flexform'], 'count', 'sDEF')) {
+			$this->conf['count'] = (int) $this->pi_getFFvalue($this->cObj->data['pi_flexform'], 'count', 'sDEF');
+		}
+
+		if($this->pi_getFFvalue($this->cObj->data['pi_flexform'], 'honor_language', 'sDEF')) {
+			$this->conf['honorLanguage'] = 1;
+		}
+
+		if($this->pi_getFFvalue($this->cObj->data['pi_flexform'], 'honor_colpos', 'sDEF')) {
+			$this->conf['honorColPos'] = 1;
+		}
+
+		if('' == $this->cObj->data['colPos']) {
+			$this->conf['colPos'] = $this->conf['defaultColPos'];
+		} else {
+			$this->conf['colPos'] = $this->cObj->data['colPos'];
+		}
+
+		return true;
 	}
 }
 
