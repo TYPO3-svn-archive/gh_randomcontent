@@ -22,6 +22,19 @@
 *
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
+/**
+ * [CLASS/FUNCTION INDEX of SCRIPT]
+ *
+ *
+ *
+ *   49: class tx_ghrandomcontent_pi1 extends tslib_pibase
+ *   63:     public function main($content,$conf)
+ *  129:     private function init()
+ *
+ * TOTAL FUNCTIONS: 2
+ * (This index is automatically created/updated by the extension "extdeveval")
+ *
+ */
 
 require_once(PATH_tslib.'class.tslib_pibase.php');
 
@@ -33,7 +46,6 @@ require_once(PATH_tslib.'class.tslib_pibase.php');
  * @package	TYPO3
  * @subpackage	tx_ghrandomcontent
  */
-
 class tx_ghrandomcontent_pi1 extends tslib_pibase {
 	public $prefixId = 'tx_ghrandomcontent_pi1';		// Same as class name
 	public $scriptRelPath = 'pi1/class.tx_ghrandomcontent_pi1.php';	// Path to this script relative to the extension dir.
@@ -44,9 +56,9 @@ class tx_ghrandomcontent_pi1 extends tslib_pibase {
 	/**
 	 * The main method of the PlugIn
 	 *
-	 * @param	string	$content: The PlugIn content
+	 * @param	string		$content: The PlugIn content
 	 * @param	array		$conf: The PlugIn configuration
-	 * @return	string	The content that is displayed on the website
+	 * @return	string		The content that is displayed on the website
 	 */
 	public function main($content,$conf)	{
 		$this->conf = $conf;
@@ -76,34 +88,34 @@ class tx_ghrandomcontent_pi1 extends tslib_pibase {
 			return false;
 		}
 
-    if(empty($this->conf['count'])) {
-      $this->conf['count'] = 1;
-    }
+		if(empty($this->conf['count'])) {
+			$this->conf['count'] = 1;
+		}
 
-    if($this->conf['count'] > count($content_ids)) {
-      $this->conf['count'] = count($content_ids);
-    }
+		if($this->conf['count'] > count($content_ids)) {
+			$this->conf['count'] = count($content_ids);
+		}
 
-    $content_shown = array_rand($content_ids, $this->conf['count']); // choose random content element
-    if(1 == $this->conf['count']) {
-      $content_shown = array($content_shown);
-    } else {
-    	shuffle($content_shown);
-    }
+		$content_shown = array_rand($content_ids, $this->conf['count']); // choose random content element
+		if(1 == $this->conf['count']) {
+			$content_shown = array($content_shown);
+		} else {
+			shuffle($content_shown);
+		}
 
-    $content = '';
-    foreach($content_shown as $content_uid) {
-      // render content element
-      $content_conf = array(
-        'table' => 'tt_content',
-        'select.' => array(
-          'uidInList' => $content_ids[$content_uid]['uid'],
-          'pidInList' => $content_ids[$content_uid]['pid'],
-        ),
-      );
+		$content = '';
+		foreach($content_shown as $content_uid) {
+			// render content element
+			$content_conf = array(
+				'table' => 'tt_content',
+				'select.' => array(
+					'uidInList' => $content_ids[$content_uid]['uid'],
+					'pidInList' => $content_ids[$content_uid]['pid'],
+				),
+			);
 
-      $content .= $GLOBALS['TSFE']->cObj->cObjGetSingle('CONTENT', $content_conf);
-    }
+			$content .= $GLOBALS['TSFE']->cObj->cObjGetSingle('CONTENT', $content_conf);
+		}
 
 		return $this->pi_wrapInBaseClass($content);
 	}
