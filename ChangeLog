@@ -1,3 +1,7 @@
+2010-03-10
+
+	* Bugfix: Flexform checkboxes now can override an default value of 1
+
 2010-03-10 Gregor Hermens <gregor.hermens@a-mazing.de>
 
 	* Added feature: Apply wrap/stdWrap to each content element and the whole output
