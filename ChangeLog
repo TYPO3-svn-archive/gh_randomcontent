@@ -1,4 +1,10 @@
-2010-03-02 Gregor Hermens <gregor.hermens@a-mazing.de>
+2010-03-10 Gregor Hermens <gregor.hermens@a-mazing.de>
+
+	* Added feature: Apply wrap/stdWrap to each content element and the whole output
+	* Code refactoring and cleanup
+	* Release 0.4.0
+
+2010-03-03 Gregor Hermens <gregor.hermens@a-mazing.de>
 
 	* Added TS setup, so plugin can now be included in the TS template.
 	* documentation update

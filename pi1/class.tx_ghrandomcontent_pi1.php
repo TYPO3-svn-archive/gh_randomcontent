@@ -27,11 +27,14 @@
  *
  *
  *
- *   49: class tx_ghrandomcontent_pi1 extends tslib_pibase
- *   63:     public function main($content,$conf)
- *  129:     private function init()
+ *   52: class tx_ghrandomcontent_pi1 extends tslib_pibase
+ *   66:     public function main($content,$conf)
+ *   93:     private function init($conf)
+ *  130:     private function getContentUids()
+ *  160:     private function selectContentUIDs ($content_ids = array())
+ *  178:     private function renderContent($content_shown = array(), $content_ids = array())
  *
- * TOTAL FUNCTIONS: 2
+ * TOTAL FUNCTIONS: 5
  * (This index is automatically created/updated by the extension "extdeveval")
  *
  */
@@ -51,7 +54,7 @@ class tx_ghrandomcontent_pi1 extends tslib_pibase {
 	public $scriptRelPath = 'pi1/class.tx_ghrandomcontent_pi1.php';	// Path to this script relative to the extension dir.
 	public $extKey = 'gh_randomcontent';	// The extension key.
 	public $pi_checkCHash = TRUE;
-#	public $conf = array();
+#	public $conf = array(); // Already set in parent class
 
 	/**
 	 * The main method of the PlugIn
@@ -61,9 +64,70 @@ class tx_ghrandomcontent_pi1 extends tslib_pibase {
 	 * @return	string		The content that is displayed on the website
 	 */
 	public function main($content,$conf)	{
-		$this->conf = $conf;
-		$this->init();
+		$this->init($conf);
 
+		$content_ids = $this->getContentUids();
+
+		if(!count($content_ids)) { // no content available at all
+			return false;
+		}
+
+		if($this->conf['count'] > count($content_ids)) {
+			$this->conf['count'] = count($content_ids);
+		}
+
+		$content_shown = $this->selectContentUIDs($content_ids);
+
+		$content = $this->renderContent($content_shown, $content_ids);
+
+		return $content;
+	}
+
+
+	/**
+	 * Initialise this class
+	 *
+	 * @param	array		$conf: The PlugIn configuration
+	 * @return	boolean		success
+	 */
+	private function init($conf) {
+		$this->conf = $conf;
+		$this->pi_initPIflexForm();		// Init FlexForm configuration for plugin
+		if($this->pi_getFFvalue($this->cObj->data['pi_flexform'], 'which_pages', 'sDEF')) {
+			$this->conf['pages'] = $this->pi_getFFvalue($this->cObj->data['pi_flexform'], 'which_pages', 'sDEF');
+		}
+
+		$this->conf['count'] = (int) $this->conf['count'];
+		if($this->pi_getFFvalue($this->cObj->data['pi_flexform'], 'count', 'sDEF')) {
+			$this->conf['count'] = (int) $this->pi_getFFvalue($this->cObj->data['pi_flexform'], 'count', 'sDEF');
+		}
+		if(empty($this->conf['count'])) {
+			$this->conf['count'] = 1;
+		}
+
+		if($this->pi_getFFvalue($this->cObj->data['pi_flexform'], 'honor_language', 'sDEF')) {
+			$this->conf['honorLanguage'] = 1;
+		}
+
+		if($this->pi_getFFvalue($this->cObj->data['pi_flexform'], 'honor_colpos', 'sDEF')) {
+			$this->conf['honorColPos'] = 1;
+		}
+
+		if('' == $this->cObj->data['colPos']) {
+			$this->conf['colPos'] = $this->conf['defaultColPos'];
+		} else {
+			$this->conf['colPos'] = $this->cObj->data['colPos'];
+		}
+
+		return true;
+	}
+
+	/**
+	 * Fetch UID of all available content elements from database
+	 *
+	 * @return	array		List of UIDs and their PIDs
+	 */
+	private function getContentUids() {
 		// get uid of all available content elements:
 		$where = 'pid IN(' . $this->conf['pages'] . ' ) ' . $this->cObj->enableFields('tt_content');
 
@@ -84,18 +148,16 @@ class tx_ghrandomcontent_pi1 extends tslib_pibase {
 			'uid'
 		);
 
-		if(!count($content_ids)) { // no content available at all
-			return false;
-		}
+		return $content_ids;
+	}
 
-		if(empty($this->conf['count'])) {
-			$this->conf['count'] = 1;
-		}
-
-		if($this->conf['count'] > count($content_ids)) {
-			$this->conf['count'] = count($content_ids);
-		}
-
+	/**
+	 * Select the content elements to be shown by random
+	 *
+	 * @param	array		List of content element UIDs and their PIDs to select from
+	 * @return	array		List of content element UIDs and their PIDs
+	 */
+	private function selectContentUIDs ($content_ids = array()) {
 		$content_shown = array_rand($content_ids, $this->conf['count']); // choose random content element
 		if(1 == $this->conf['count']) {
 			$content_shown = array($content_shown);
@@ -103,6 +165,17 @@ class tx_ghrandomcontent_pi1 extends tslib_pibase {
 			shuffle($content_shown);
 		}
 
+		return $content_shown;
+	}
+
+	/**
+	 * Render selected content elements
+	 *
+	 * @param	array		List of content element UIDs to show
+	 * @param	array		List of all available content element UIDs and their PIDs
+	 * @return	string		HTML
+	 */
+	private function renderContent($content_shown = array(), $content_ids = array()) {
 		$content = '';
 		foreach($content_shown as $content_uid) {
 			// render content element
@@ -114,44 +187,26 @@ class tx_ghrandomcontent_pi1 extends tslib_pibase {
 				),
 			);
 
-			$content .= $GLOBALS['TSFE']->cObj->cObjGetSingle('CONTENT', $content_conf);
+			$element = $GLOBALS['TSFE']->cObj->cObjGetSingle('CONTENT', $content_conf);
+
+			if(!empty($this->conf['elementWrap.'])) {
+				$element = $this->cObj->stdWrap($element, $this->conf['elementWrap.']);
+			}
+			if(!empty($this->conf['elementWrap'])) {
+				$element = $this->cObj->wrap($element, $this->conf['elementWrap']);
+			}
+
+			$content .= $element;
 		}
 
-		return $this->pi_wrapInBaseClass($content);
-	}
-
-
-	/**
-	 * Initialise this class
-	 *
-	 * @return	boolean		success
-	 */
-	private function init() {
-		$this->pi_initPIflexForm();		// Init FlexForm configuration for plugin
-		if($this->pi_getFFvalue($this->cObj->data['pi_flexform'], 'which_pages', 'sDEF')) {
-			$this->conf['pages'] = $this->pi_getFFvalue($this->cObj->data['pi_flexform'], 'which_pages', 'sDEF');
+		if(!empty($this->conf['allWrap.'])) {
+			$content = $this->cObj->stdWrap($content, $this->conf['allWrap.']);
+		}
+		if(!empty($this->conf['allWrap'])) {
+			$content = $this->cObj->wrap($content, $this->conf['allWrap']);
 		}
 
-		$this->conf['count'] = (int) $this->conf['count'];
-		if($this->pi_getFFvalue($this->cObj->data['pi_flexform'], 'count', 'sDEF')) {
-			$this->conf['count'] = (int) $this->pi_getFFvalue($this->cObj->data['pi_flexform'], 'count', 'sDEF');
-		}
-
-		if($this->pi_getFFvalue($this->cObj->data['pi_flexform'], 'honor_language', 'sDEF')) {
-			$this->conf['honorLanguage'] = 1;
-		}
-
-		if($this->pi_getFFvalue($this->cObj->data['pi_flexform'], 'honor_colpos', 'sDEF')) {
-			$this->conf['honorColPos'] = 1;
-		}
-
-		if('' == $this->cObj->data['colPos']) {
-			$this->conf['colPos'] = $this->conf['defaultColPos'];
-		} else {
-			$this->conf['colPos'] = $this->cObj->data['colPos'];
-		}
-
-		return true;
+		return $content;
 	}
 }
 
