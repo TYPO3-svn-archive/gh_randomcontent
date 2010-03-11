@@ -1,4 +1,8 @@
-2010-03-10
+2010-03-11 Gregor Hermens <gregor.hermens@a-mazing.de>
+
+	* documentation formatting
+
+2010-03-10 Gregor Hermens <gregor.hermens@a-mazing.de>
 
 	* Bugfix: Flexform checkboxes now can override an default value of 1
 
