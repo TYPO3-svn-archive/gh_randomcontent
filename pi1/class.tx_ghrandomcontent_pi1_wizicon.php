@@ -34,7 +34,7 @@ class tx_ghrandomcontent_pi1_wizicon {
 	function proc($wizardItems)	{
 		global $LANG;
 
-		$LL = $LANG->readLLfile(t3lib_extMgm::extPath('gh_randomcontent').'locallang.xml');
+		$LL = t3lib_div::readLLfile(t3lib_extMgm::extPath('gh_randomcontent').'locallang.xml', $LANG->lang, $LANG->charSet);
 
 		$wizardItems['plugins_tx_ghrandomcontent_pi1'] = array(
 			'icon'=>t3lib_extMgm::extRelPath('gh_randomcontent').'pi1/ce_wiz.gif',

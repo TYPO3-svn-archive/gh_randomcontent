@@ -1,5 +1,8 @@
 2010-06-24 Gregor Hermens <gregor.hermens@a-mazing.de>
 
+	* Release 0.4.2
+	* Changed dependancies to TYPO3 >= 4.2
+	* final fix for #8488: Call to protected method language::readLLfile
 	* Release 0.4.1
 	* quick fix for #8488: Disable icon wizard
 
