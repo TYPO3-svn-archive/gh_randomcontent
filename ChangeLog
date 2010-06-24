@@ -1,3 +1,8 @@
+2010-06-24 Gregor Hermens <gregor.hermens@a-mazing.de>
+
+	* Release 0.4.1
+	* quick fix for #8488: Disable icon wizard
+
 2010-03-11 Gregor Hermens <gregor.hermens@a-mazing.de>
 
 	* documentation formatting
