@@ -54,7 +54,6 @@ class tx_ghrandomcontent_pi1 extends tslib_pibase {
 	public $scriptRelPath = 'pi1/class.tx_ghrandomcontent_pi1.php';	// Path to this script relative to the extension dir.
 	public $extKey = 'gh_randomcontent';	// The extension key.
 	public $pi_checkCHash = TRUE;
-#	public $conf = array(); // Already set in parent class
 
 	/**
 	 * The main method of the PlugIn
@@ -90,7 +89,7 @@ class tx_ghrandomcontent_pi1 extends tslib_pibase {
 	 * @param	array		$conf: The PlugIn configuration
 	 * @return	boolean		success
 	 */
-	private function init($conf) {
+	protected function init($conf) {
 		$this->conf = $conf;
 		$this->pi_initPIflexForm();		// Init FlexForm configuration for plugin
 		if($this->pi_getFFvalue($this->cObj->data['pi_flexform'], 'which_pages', 'sDEF')) {
@@ -124,7 +123,7 @@ class tx_ghrandomcontent_pi1 extends tslib_pibase {
 	 *
 	 * @return	array		List of UIDs and their PIDs
 	 */
-	private function getContentUids() {
+	protected function getContentUids() {
 		// get uid of all available content elements:
 		$where = 'pid IN(' . $this->conf['pages'] . ' ) ' . $this->cObj->enableFields('tt_content');
 
@@ -154,7 +153,7 @@ class tx_ghrandomcontent_pi1 extends tslib_pibase {
 	 * @param	array		List of content element UIDs and their PIDs to select from
 	 * @return	array		List of content element UIDs and their PIDs
 	 */
-	private function selectContentUIDs ($content_ids = array()) {
+	protected function selectContentUIDs ($content_ids = array()) {
 		$content_shown = array_rand($content_ids, $this->conf['count']); // choose random content element
 		if(1 == $this->conf['count']) {
 			$content_shown = array($content_shown);
@@ -172,7 +171,7 @@ class tx_ghrandomcontent_pi1 extends tslib_pibase {
 	 * @param	array		List of all available content element UIDs and their PIDs
 	 * @return	string		HTML
 	 */
-	private function renderContent($content_shown = array(), $content_ids = array()) {
+	protected function renderContent($content_shown = array(), $content_ids = array()) {
 		$content = '';
 		foreach($content_shown as $content_uid) {
 			// render content element
@@ -184,7 +183,7 @@ class tx_ghrandomcontent_pi1 extends tslib_pibase {
 				),
 			);
 
-			$element = $GLOBALS['TSFE']->cObj->cObjGetSingle('CONTENT', $content_conf);
+			$element = $this->cObj->CONTENT($content_conf);
 
 			if(!empty($this->conf['elementWrap.'])) {
 				$element = $this->cObj->stdWrap($element, $this->conf['elementWrap.']);
