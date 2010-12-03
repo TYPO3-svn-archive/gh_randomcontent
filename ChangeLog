@@ -1,3 +1,9 @@
+2010-12-03 Gregor Germens <gregor.hermens@a-mazing.de>
+
+	* Release 0.4.3
+	* documentation: Added MEDIA CE to known problems (thanks to Alexander Weber <weber@exotec.de>)
+	* some code cleanups
+
 2010-06-24 Gregor Hermens <gregor.hermens@a-mazing.de>
 
 	* Release 0.4.2
