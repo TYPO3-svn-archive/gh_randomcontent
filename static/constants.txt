@@ -19,4 +19,10 @@ plugin.tx_ghrandomcontent {
 
 	# cat=plugin.tx_ghrandomcontent//g; type=wrap; label=allWrap: Wrap around the whole output:
 	allWrap = <div class="tx-ghrandomcontent-pi1">|</div>
+
+	# cat=plugin.tx_ghrandomcontent//h; type=comment; label=includeMediaSwfJs: Include javascript file for swf media elements:
+	includeMediaSwfJs = #
+
+	# cat=plugin.tx_ghrandomcontent//i; type=comment; label=includeMediaQtJs: Include javascript file for quicktime media elements:
+	includeMediaQtJs = #
 }

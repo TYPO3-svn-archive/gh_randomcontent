@@ -1,4 +1,10 @@
-2010-12-03 Gregor Germens <gregor.hermens@a-mazing.de>
+2010-12-05 Gregor Hermens <gregor.hermens@a-mazing.de>
+
+	* Release 0.4.4
+	* documentation update
+	* Added feature: Inclusion of MEDIA CE's javascript files can now be activated via Constant Editor
+
+2010-12-03 Gregor Hermens <gregor.hermens@a-mazing.de>
 
 	* Release 0.4.3
 	* documentation: Added MEDIA CE to known problems (thanks to Alexander Weber <weber@exotec.de>)

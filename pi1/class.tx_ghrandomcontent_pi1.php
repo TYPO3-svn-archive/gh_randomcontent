@@ -28,11 +28,11 @@
  *
  *
  *   52: class tx_ghrandomcontent_pi1 extends tslib_pibase
- *   66:     public function main($content,$conf)
- *   93:     private function init($conf)
- *  130:     private function getContentUids()
- *  160:     private function selectContentUIDs ($content_ids = array())
- *  178:     private function renderContent($content_shown = array(), $content_ids = array())
+ *   65:     public function main($content,$conf)
+ *   92:     protected function init($conf)
+ *  126:     protected function getContentUids()
+ *  155:     protected function selectContentUIDs ($content_ids = array())
+ *  173:     protected function renderContent($content_shown = array(), $content_ids = array())
  *
  * TOTAL FUNCTIONS: 5
  * (This index is automatically created/updated by the extension "extdeveval")
@@ -124,7 +124,6 @@ class tx_ghrandomcontent_pi1 extends tslib_pibase {
 	 * @return	array		List of UIDs and their PIDs
 	 */
 	protected function getContentUids() {
-		// get uid of all available content elements:
 		$where = 'pid IN(' . $this->conf['pages'] . ' ) ' . $this->cObj->enableFields('tt_content');
 
 		if($this->conf['honorLanguage']) {
@@ -209,5 +208,4 @@ class tx_ghrandomcontent_pi1 extends tslib_pibase {
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/gh_randomcontent/pi1/class.tx_ghrandomcontent_pi1.php'])	{
 	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/gh_randomcontent/pi1/class.tx_ghrandomcontent_pi1.php']);
 }
-
 ?>

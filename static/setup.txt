@@ -7,3 +7,6 @@ plugin.tx_ghrandomcontent_pi1 {
 	elementWrap = {$plugin.tx_ghrandomcontent.elementWrap}
 	allWrap = {$plugin.tx_ghrandomcontent.allWrap}
 }
+
+{$plugin.tx_ghrandomcontent.includeMediaSwfJs} page.includeJS.swfobject = typo3/contrib/flashmedia/swfobject/swfobject.js
+{$plugin.tx_ghrandomcontent.includeMediaQtJs} page.includeJS.qtobject = typo3/contrib/flashmedia/qtobject/qtobject.js

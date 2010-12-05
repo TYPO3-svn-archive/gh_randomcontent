@@ -3,7 +3,7 @@
 ########################################################################
 # Extension Manager/Repository config file for ext "gh_randomcontent".
 #
-# Auto generated 24-06-2010 21:28
+# Auto generated 05-12-2010 13:59
 #
 # Manual updates:
 # Only the data in the array - everything else is removed by next
@@ -15,7 +15,7 @@ $EM_CONF[$_EXTKEY] = array(
 	'description' => 'This frontend plugin shows random content elements from selected page(s). It is based on onet_randomcontent, but provides more flexibility.',
 	'category' => 'plugin',
 	'shy' => 0,
-	'version' => '0.4.2',
+	'version' => '0.4.4',
 	'dependencies' => 'cms',
 	'conflicts' => '',
 	'priority' => '',
@@ -43,7 +43,7 @@ $EM_CONF[$_EXTKEY] = array(
 		'suggests' => array(
 		),
 	),
-	'_md5_values_when_last_written' => 'a:16:{s:9:"ChangeLog";s:4:"faf4";s:10:"README.txt";s:4:"9fa9";s:12:"ext_icon.gif";s:4:"d4fb";s:17:"ext_localconf.php";s:4:"4026";s:14:"ext_tables.php";s:4:"51a2";s:15:"flexform_ds.xml";s:4:"5b6a";s:13:"locallang.xml";s:4:"ec81";s:16:"locallang_db.xml";s:4:"fd98";s:14:"doc/manual.pdf";s:4:"b0a9";s:14:"doc/manual.sxw";s:4:"a44c";s:14:"pi1/ce_wiz.gif";s:4:"c794";s:36:"pi1/class.tx_ghrandomcontent_pi1.php";s:4:"bd47";s:44:"pi1/class.tx_ghrandomcontent_pi1_wizicon.php";s:4:"2054";s:17:"pi1/locallang.xml";s:4:"ba12";s:20:"static/constants.txt";s:4:"c8ec";s:16:"static/setup.txt";s:4:"3b8c";}',
+	'_md5_values_when_last_written' => 'a:15:{s:9:"ChangeLog";s:4:"654a";s:12:"ext_icon.gif";s:4:"d4fb";s:17:"ext_localconf.php";s:4:"4026";s:14:"ext_tables.php";s:4:"51a2";s:15:"flexform_ds.xml";s:4:"5b6a";s:13:"locallang.xml";s:4:"ec81";s:16:"locallang_db.xml";s:4:"fd98";s:14:"doc/manual.pdf";s:4:"1769";s:14:"doc/manual.sxw";s:4:"5e90";s:14:"pi1/ce_wiz.gif";s:4:"c794";s:36:"pi1/class.tx_ghrandomcontent_pi1.php";s:4:"a836";s:44:"pi1/class.tx_ghrandomcontent_pi1_wizicon.php";s:4:"2054";s:17:"pi1/locallang.xml";s:4:"ba12";s:20:"static/constants.txt";s:4:"eba6";s:16:"static/setup.txt";s:4:"d086";}',
 	'suggests' => array(
 	),
 );
