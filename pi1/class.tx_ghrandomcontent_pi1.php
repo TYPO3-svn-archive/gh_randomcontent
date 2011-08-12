@@ -127,7 +127,7 @@ class tx_ghrandomcontent_pi1 extends tslib_pibase {
 		$where = 'pid IN(' . $this->conf['pages'] . ' ) ' . $this->cObj->enableFields('tt_content');
 
 		if($this->conf['honorLanguage']) {
-			$where .= ' AND sys_language_uid = ' . $GLOBALS['TSFE']->sys_page->sys_language_uid;
+			$where .= ' AND ( sys_language_uid = ' . $GLOBALS['TSFE']->sys_page->sys_language_uid . ' OR sys_language_uid = -1 )';
 		}
 		if($this->conf['honorColPos']) {
 			$where .= ' AND colPos = ' . $this->conf['colPos'];

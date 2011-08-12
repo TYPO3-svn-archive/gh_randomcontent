@@ -1,3 +1,9 @@
+2011-08-12 Gregor Hermens <gregor.hermens@a-mazing.de>
+
+	* Release 0.4.5
+	* #28942: honorLanguage does not honor "all languages" (thanks to  Marc Véron)
+	* Changed dependancies to TYPO3 >= 4.3
+
 2010-12-05 Gregor Hermens <gregor.hermens@a-mazing.de>
 
 	* Release 0.4.4
